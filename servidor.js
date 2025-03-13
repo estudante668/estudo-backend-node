@@ -6,9 +6,13 @@ const requisicoes = ((req,res)=>{
     const url = req.url;
     const metodo = req.method
     if(url === '/' && metodo === 'GET'){
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Meu Primeiro servidor texto\n');
+        res.setHeader('Set-Cookie', [
+            'usuario=teste; HttpOnly', 
+            'preferencia=amarelo; Max-Age=90'
+          ]);
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end('COOKIE ENVIADO\n');
+
     } else if(url === '/pagina' && metodo === 'GET'){
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end('<html><body><h1>This is HTML</h1><h2>Pagina Html</h2></body></html>');
